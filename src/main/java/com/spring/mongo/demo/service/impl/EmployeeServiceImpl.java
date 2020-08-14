@@ -62,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (emp.getLastName().equalsIgnoreCase(employee.getLastName()))
 				return emp;
 		}
-		return new Employee(0, "Not Found", "Please enter valid id", 0.0f);
+		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid id").salary(0f).build();
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (employee.getEmpId() == emp.getEmpId())
 				return emp;
 		}
-		return new Employee(0, "Not Found", "Please enter valid id", 0.0f);
+		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid id").salary(0f).build();
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (emp.getFirstName().equalsIgnoreCase(employee.getFirstName()))
 				return emp;
 		}
-		return new Employee(0, "Not Found", "Please enter valid id", 0.0f);
+		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid id").salary(0f).build();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if (emp.getFirstName().equals(employee.getFirstName()))
 				return emp;
 		}
-		return new Employee(0, "Not Found", "Please enter valid id", 0.0f);
+		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid id").salary(0f).build();
 	}
 
 	@Override

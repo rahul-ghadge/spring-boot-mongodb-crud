@@ -75,8 +75,9 @@ class EmployeeQueryDaoImpl implements EmployeeQueryDao {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("salary").gt(salary));
 		//query.addCriteria(Criteria.where("salary").gt(4000));
-		query.with(new Sort(Sort.Direction.ASC, "firstName"));
-		
+		query.with(Sort.by(Sort.Direction.ASC, "firstName"));
+		query.with(Sort.by(new Sort.Order(Sort.Direction.ASC, "firstName").ignoreCase()));
+
 		return mongoTemplate.find(query, Employee.class);
 	}
 	

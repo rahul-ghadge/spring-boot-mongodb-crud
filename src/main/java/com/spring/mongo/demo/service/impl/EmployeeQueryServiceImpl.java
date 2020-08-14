@@ -46,8 +46,7 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 			return employeeQueryDao.getSingleEmployeeByFirstName(firstName);
 		}
 
-		return new Employee(0, "Not Found", "Please enter valid id", 0.0f);
-
+		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid id").salary(0f).build();
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 			String lastName = employee.getLastName();
 			return employeeQueryDao.getSingleEmployeeByLastName(lastName);
 		}
-		return new Employee(0, "Not Found", "Please enter valid last name", 0.0f);
+		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid last name").salary(0f).build();
 	}
 
 	@Override
