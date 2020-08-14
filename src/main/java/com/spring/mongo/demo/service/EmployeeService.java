@@ -17,11 +17,11 @@ public interface EmployeeService {
 	
 	Employee getEmployeeByFirstName(Employee employee);
 	
-	List<Employee> getEmployeebyFrName(Employee employee);
+	List<Employee> getEmployeeByFrName(Employee employee);
 	
-	List<Employee> getEmployeebyWhereSalary(Employee employee);
+	List<Employee> getEmployeeByWhereSalary(Employee employee);
 	
-	List<Employee> getEmployeebyCondition(Employee employee);
+	List<Employee> getEmployeeByCondition(Employee employee);
 	
 	
 	

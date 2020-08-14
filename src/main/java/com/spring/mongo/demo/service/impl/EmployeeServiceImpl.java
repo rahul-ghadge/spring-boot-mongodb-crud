@@ -14,8 +14,7 @@ import com.spring.mongo.demo.service.EmployeeService;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	
-	
+
 	@Autowired
 	private EmployeeRepository repository;
 	
@@ -24,41 +23,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 	
 	
-	// practice 
-	// Modify Employee class as per Pets class
-	// Add Mongo dependencies in pom.xml file
-	// Add mongoDB credentials in application.properties file
-	// Add DatabaseConfiguration under "config" package
-	// Instead of fetching that from static list fetch it from DB 
-		// Get all employees in postman (API : localhost:8083/ )
-		// create employee collection in DB
-		// use that response to db.employee.insertMany(......)
-	// Test below API's
-	
-	
-	
-	
-	
-
 	@Override
 	public List<Employee> get() {
-		//return repository.findAll();
-		return employeeDao.getEmployeeByFirstName("Binay");
+		return repository.findAll();
 	}
 	
-	
-	
-
 	@Override
 	public Employee getEmployeeBylName(Employee employee) {
 		
+		List<Employee> employees = repository.findAll();
 		
-		List<Employee> list = repository.findAll();
-		
-		// ex. repository.findAll();
-		
-		
-		for (Employee emp : list) {
+		for (Employee emp : employees) {
 			if (emp.getLastName().equalsIgnoreCase(employee.getLastName()))
 				return emp;
 		}
@@ -67,8 +42,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee getEmployee(Employee employee) {
-		List<Employee> list = repository.findAll();
-		for (Employee emp : list) {
+		List<Employee> employees = repository.findAll();
+		for (Employee emp : employees) {
 			if (employee.getEmpId() == emp.getEmpId())
 				return emp;
 		}
@@ -77,8 +52,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee getEmployeeByName(Employee employee) {
-		List<Employee> list = repository.findAll();
-		for (Employee emp : list) {
+		List<Employee> employees = repository.findAll();
+		for (Employee emp : employees) {
 			if (emp.getFirstName().equalsIgnoreCase(employee.getFirstName()))
 				return emp;
 		}
@@ -96,44 +71,45 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employee> getEmployeebyFrName(Employee employee) {
-		List<Employee> list = repository.findAll();
-		List<Employee> matchingEmps = new ArrayList<>();
-		
-		if (null != employee && null != employee.getFirstName() && !(employee.getFirstName().equals(""))) {
+	public List<Employee> getEmployeeByFrName(Employee employee) {
+		List<Employee> employees = new ArrayList<>();
+
+		if (null != employee && null != employee.getFirstName()
+				&& !(employee.getFirstName().equals(""))) {
+			List<Employee> list = repository.findAll();
+
 			for (Employee emp : list) {
-				// 10000
 				if (emp.getFirstName().toLowerCase().contains(employee.getFirstName().toLowerCase())) {
-					matchingEmps.add(emp);
+					employees.add(emp);
 				}
 			}
 		}
-		return matchingEmps;
+		return employees;
 	}
 
 	@Override
-	public List<Employee> getEmployeebyWhereSalary(Employee employee) {
-		List<Employee> list = repository.findAll();
-		List<Employee> matchingEmps = new ArrayList<>();
+	public List<Employee> getEmployeeByWhereSalary(Employee employee) {
+		List<Employee> employees = new ArrayList<>();
 
-		for (Employee emp : list) {
+		if (employee.getSalary() > 0) {
+			List<Employee> list = repository.findAll();
 
-			if (employee.getSalary() > 0) {
+			for (Employee emp : list) {
 				if (emp.getSalary() > employee.getSalary())
-					matchingEmps.add(emp);
+					employees.add(emp);
 			}
 		}
 
-		return matchingEmps;
+		return employees;
 	}
 
 	
 	
 	
 	@Override
-	public List<Employee> getEmployeebyCondition(Employee employee) {
+	public List<Employee> getEmployeeByCondition(Employee employee) {
 		List<Employee> list = repository.findAll();
-		List<Employee> matchingEmps = new ArrayList<>();
+		List<Employee> employees = new ArrayList<>();
 
 		// This will return true if employee object is present(not null) any one of
 		// property is not null OR greater than 0
@@ -150,11 +126,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 							&& emp.getFirstName().equalsIgnoreCase(employee.getFirstName())
 							&& emp.getLastName().equalsIgnoreCase(employee.getLastName())
 							&& emp.getSalary() == employee.getSalary()) {
-						matchingEmps.add(emp);
+						employees.add(emp);
 						// Break the for loop
 						break;
 					} else {
-						// Go back to first statement (nothing but for loop)
+						// Go back to first statement
 						continue;
 					}
 				}
@@ -163,16 +139,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 				// block is executing
 				// Emp Id
 				if (employee.getEmpId() == emp.getEmpId()) {
-					matchingEmps.add(emp);
-					// Go back to first statement (nothing but for loop)
+					employees.add(emp);
+					// Go back to first statement
 					continue;
 				}
 
 				// First name
 				if (null != employee.getFirstName()) {
 					if (emp.getFirstName().toLowerCase().contains(employee.getFirstName().toLowerCase())) {
-						matchingEmps.add(emp);
-						// Go back to first statement (nothing but for loop)
+						employees.add(emp);
+						// Go back to first statement
 						continue;
 					}
 				}
@@ -180,26 +156,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 				// Last name
 				if (null != employee.getLastName()) {
 					if (emp.getLastName().equalsIgnoreCase(employee.getLastName()))
-						matchingEmps.add(emp);
-					// Go back to first statement (nothing but for loop)
+						employees.add(emp);
+					// Go back to first statement
 					continue;
 				}
 				// salary
 				if (employee.getSalary() == emp.getSalary()) {
-					matchingEmps.add(emp);
-					// Go back to first statement (nothing but for loop)
+					employees.add(emp);
+					// Go back to first statement
 					continue;
 				}
 				// ---------------------------------------------------------
 			}
 			// returning the list
-			return matchingEmps;
+			return employees;
 		}
 		// if below statements return false only then below list is returning
 		// if (null != employee &&
 		// (null != employee.getFirstName() || employee.getEmpId() > 0
 		// || null != employee.getLastName() || employee.getSalary() > 0))
-		return matchingEmps;
+		return employees;
 	}
 
 }

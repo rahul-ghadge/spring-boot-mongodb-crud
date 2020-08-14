@@ -3,16 +3,13 @@ package com.spring.mongo.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.spring.mongo.demo.model.Employee;
 import com.spring.mongo.demo.service.EmployeeService;
 
 @RestController
+@RequestMapping("/employee-jpa")
 public class EmployeeController {
 	
 	@Autowired
@@ -29,45 +26,39 @@ public class EmployeeController {
 	}
 	
 
-	@PostMapping("get-employee-by-id")
+	@PostMapping("get-by-id")
 	public Employee getEmployee(@RequestBody Employee employee) {
 		return employeeService.getEmployee(employee);
 	}
 	
-	@PostMapping("get-employee-by-fname")
+	@PostMapping("get-by-firstname")
 	public Employee getEmployeeByName(@RequestBody Employee employee) {
 		return employeeService.getEmployeeByName(employee);
 	}
 
-	// get employee by last name(Done! question - searching by lName it only showing
-	// 1 result)
-	@PostMapping("get-employee-by-lname")
+	@PostMapping("get-by-lastname")
 	public Employee getEmployeeBylName(@RequestBody Employee employee) {
 		return employeeService.getEmployeeBylName(employee);
 	}
 
-	// get employee by fname (equals())(Done)
 	@PostMapping("get-employee-by-firstName")
 	public Employee getEmployeeByFirstName(@RequestBody Employee employee) {
 		return employeeService.getEmployeeByFirstName(employee);
 	}
 		
-	// get employee by fname (contains())(Done! Question - Searching by Upper Case &
-	// lower case)
 	@PostMapping("get-employee-by-frName")
 	public List<Employee> getEmployeeByFrName(@RequestBody Employee employee) {
-		return employeeService.getEmployeebyFrName(employee);
+		return employeeService.getEmployeeByFrName(employee);
 	}
 
-	// get employee where salary > 5000.0d(not running)
 	@PostMapping("get-employee-with-salary")
 	public List<Employee> getEmployeeByWhereSalary(@RequestBody Employee employee) {
-		return employeeService.getEmployeebyWhereSalary(employee);
+		return employeeService.getEmployeeByWhereSalary(employee);
 	}
 	
 	@PostMapping("get-employee-by-condition")
 	public List<Employee> getEmployeeByCondition(@RequestBody Employee employee) {
-		return employeeService.getEmployeebyCondition(employee);
+		return employeeService.getEmployeeByCondition(employee);
 	}
 }
 
