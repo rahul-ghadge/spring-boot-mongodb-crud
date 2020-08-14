@@ -163,8 +163,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 				// salary
 				if (employee.getSalary() == emp.getSalary()) {
 					employees.add(emp);
-					// Go back to first statement
-					continue;
 				}
 				// ---------------------------------------------------------
 			}
