@@ -6,15 +6,16 @@ import com.spring.mongo.demo.model.Employee;
 
 public interface EmployeeQueryDao {
 	
-	List<Employee> get();
+	List<Employee> getAll();
 
 	List<Employee> getEmployeeByFirstName(String firstName);
 
 	Employee getSingleEmployeeByFirstName(String firstName);
 
+	List<Employee> getEmployeeByFirstNameLike(String firstName);
+
 	Employee getSingleEmployeeByLastName(String lastName);
 
-	List<Employee> getSalary(float salary);
+	List<Employee> getEmployeeBySalaryGreaterThan(int salary);
 
-	
 }

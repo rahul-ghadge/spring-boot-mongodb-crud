@@ -1,6 +1,7 @@
 package com.spring.mongo.demo.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.spring.mongo.demo.model.Employee;
 import com.spring.mongo.demo.repository.EmployeeQueryDao;
 import com.spring.mongo.demo.service.EmployeeQueryService;
+import org.springframework.util.StringUtils;
 
 @Service
 public class EmployeeQueryServiceImpl implements EmployeeQueryService {
@@ -17,61 +19,63 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 	private EmployeeQueryDao employeeQueryDao;
 
 	@Override
-	public List<Employee> get() {
+	public List<Employee> getAll() {
 		System.out.println("Inside Employee Query Service Impl");
-		return employeeQueryDao.get();
+		return employeeQueryDao.getAll();
 	}
 
 	@Override
-	public List<Employee> getEmployeeByFName(Employee employee) {
+	public List<Employee> getEmployeeByFirstName(String firstName) {
 
-		if (null != employee && null != employee.getFirstName()) {
-			String firstName = employee.getFirstName();
+		if (!StringUtils.isEmpty(firstName)) {
 			return employeeQueryDao.getEmployeeByFirstName(firstName);
 		}
 
 		return null;
 	}
 
+
 	@Override
-	public Employee getSingleEmployeeByFName(Employee employee) {
+	public Employee getOneEmployeeByFirstName(String firstName) {
 
-		// checking employee is not null and only then employee firstName not null
-		if (null != employee && null != employee.getFirstName()) {
-
-			// fetching first name from user request and storing it into firstName variable
-			String firstName = employee.getFirstName();
-
-			// passing user input to DAO layer
+		if (!StringUtils.isEmpty(firstName)) {
 			return employeeQueryDao.getSingleEmployeeByFirstName(firstName);
 		}
 
-		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid id").salary(0f).build();
+		return null;
+	}
+	@Override
+	public List<Employee> getEmployeeByFirstNameLike(String firstName) {
+
+		if (!StringUtils.isEmpty(firstName)) {
+			return employeeQueryDao.getEmployeeByFirstNameLike(firstName);
+		}
+
+		return null;
 	}
 
-	@Override
-	public Employee getSingleEmployeeByLName(Employee employee) {
 
-		if (null != employee && null != employee.getLastName()) {
-			String lastName = employee.getLastName();
+	@Override
+	public Employee getSingleEmployeeByLastName(String lastName) {
+
+		if (!StringUtils.isEmpty(lastName)) {
 			return employeeQueryDao.getSingleEmployeeByLastName(lastName);
 		}
-		return new Employee().builder().empId(0).firstName("Not Found").lastName("Please enter valid last name").salary(0f).build();
+		return Employee.builder().empId(0).firstName("Not Found").lastName("Please enter valid last name").salary(0f).build();
 	}
 
 	@Override
-	public List<Employee> getEmployeeBySalary(Employee employee) {
+	public List<Employee> getEmployeeBySalaryGreaterThan(int salary) {
 
-		if (null != employee && employee.getSalary() > 0) {
-			float salary = employee.getSalary();
-			return employeeQueryDao.getSalary(salary);
+		if (salary > 0) {
+			return employeeQueryDao.getEmployeeBySalaryGreaterThan(salary);
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
 	public List<Employee> getEmployeeByCondition(Employee employee) {
-		List<Employee> list = employeeQueryDao.get();
+		List<Employee> list = employeeQueryDao.getAll();
 		List<Employee> matchingEmps = new ArrayList<>();
 
 		if (null != employee && (null != employee.getFirstName() || employee.getEmpId() > 0
@@ -117,8 +121,6 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 				// salary
 				if (employee.getSalary() == emp.getSalary()) {
 					matchingEmps.add(emp);
-					// Go back to first statement (nothing but for loop)
-					continue;
 				}
 				// ---------------------------------------------------------
 			}

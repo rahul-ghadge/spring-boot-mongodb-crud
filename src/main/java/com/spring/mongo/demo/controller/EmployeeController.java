@@ -15,48 +15,51 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@GetMapping("say")
+	@GetMapping("/say")
 	public String sayHello() {
 		return "Hello Spring boot";
 	}
 	
 	@GetMapping
-	public List<Employee> get() {
-		return employeeService.get();
+	public List<Employee> getAll() {
+		return employeeService.getAll();
 	}
 	
 
-	@PostMapping("get-by-id")
-	public Employee getEmployee(@RequestBody Employee employee) {
-		return employeeService.getEmployee(employee);
+	@GetMapping("/{empId}")
+	public Employee getEmployeeById(@PathVariable int empId ) {
+		return employeeService.getEmployeeById(empId);
 	}
 	
-	@PostMapping("get-by-firstname")
-	public Employee getEmployeeByName(@RequestBody Employee employee) {
-		return employeeService.getEmployeeByName(employee);
+	@GetMapping("/firstName/{firstName}")
+	public List<Employee> getEmployeeByName(@PathVariable String firstName ) {
+		return employeeService.getEmployeeByFirstName(firstName);
 	}
 
-	@PostMapping("get-by-lastname")
-	public Employee getEmployeeBylName(@RequestBody Employee employee) {
-		return employeeService.getEmployeeBylName(employee);
+	// get employee by first name (equals())
+	@GetMapping("/one-by-firstName/{firstName}")
+	public Employee getOneEmployeeByFirstName(@PathVariable String firstName) {
+		return employeeService.getOneEmployeeByFirstName(firstName);
 	}
 
-	@PostMapping("get-employee-by-firstName")
-	public Employee getEmployeeByFirstName(@RequestBody Employee employee) {
-		return employeeService.getEmployeeByFirstName(employee);
-	}
-		
-	@PostMapping("get-employee-by-frName")
-	public List<Employee> getEmployeeByFrName(@RequestBody Employee employee) {
-		return employeeService.getEmployeeByFrName(employee);
+	// get employee by first name %LIKE%
+	@GetMapping("/firstName-like/{firstName}")
+	public List<Employee> getEmployeeByFirstNameLike(@PathVariable String firstName) {
+		return employeeService.getEmployeeByFirstNameLike(firstName);
 	}
 
-	@PostMapping("get-employee-with-salary")
-	public List<Employee> getEmployeeByWhereSalary(@RequestBody Employee employee) {
-		return employeeService.getEmployeeByWhereSalary(employee);
+	@GetMapping("/get-one-by-lastName/{lastName}")
+	public Employee getEmployeeBylName(@PathVariable String lastName) {
+		return employeeService.getEmployeeByLastName(lastName);
+	}
+
+
+	@GetMapping("/salary-greater-than/{salary}")
+	public List<Employee> getEmployeeBySalaryGreaterThan(@PathVariable int salary) {
+		return employeeService.getEmployeeBySalaryGreaterThan(salary);
 	}
 	
-	@PostMapping("get-employee-by-condition")
+	@PostMapping("/get-by-condition")
 	public List<Employee> getEmployeeByCondition(@RequestBody Employee employee) {
 		return employeeService.getEmployeeByCondition(employee);
 	}

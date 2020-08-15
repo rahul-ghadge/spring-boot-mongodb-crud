@@ -16,35 +16,45 @@ public class EmployeeQueryController {
     private EmployeeQueryService employeeQueryService;
 
     @GetMapping
-    public List<Employee> get() {
-        return employeeQueryService.get();
-    }
-
-    // get employee by first name (equals())
-    @PostMapping("/get-by-firstName")
-    public List<Employee> getEmployeeByFirstName(@RequestBody Employee employee) {
-        return employeeQueryService.getEmployeeByFName(employee);
+    public List<Employee> getAll() {
+        return employeeQueryService.getAll();
     }
 
 
-    // get employee by first name (equals())
-    @PostMapping("/get-one-by-firstName")
-    public Employee getSingleEmployeeByFirstName(@RequestBody Employee employee) {
-        return employeeQueryService.getSingleEmployeeByFName(employee);
+    // getAll employee by first name (equals())
+    @GetMapping("/firstName/{firstName}")
+    public List<Employee> getEmployeeByFirstName(@PathVariable String firstName) {
+        return employeeQueryService.getEmployeeByFirstName(firstName);
     }
 
-    // get employee by last name (equals())
-    @PostMapping("/get-one-by-lastName")
-    public Employee getSingleEmployeeByLastName(@RequestBody Employee employee) {
-        return employeeQueryService.getSingleEmployeeByLName(employee);
+
+    // getAll employee by first name (equals())
+    @GetMapping("/one-by-firstName/{firstName}")
+    public Employee getOneEmployeeByFirstName(@PathVariable String firstName) {
+        return employeeQueryService.getOneEmployeeByFirstName(firstName);
     }
 
-    @PostMapping("/get-by-salary")
-    public List<Employee> getEmployeeBySalary(@RequestBody Employee employee) {
-        return employeeQueryService.getEmployeeBySalary(employee);
+    // getAll employee by first name %LIKE%
+    @GetMapping("/firstName-like/{firstName}")
+    public List<Employee> getEmployeeByFirstNameLike(@PathVariable String firstName) {
+        return employeeQueryService.getEmployeeByFirstNameLike(firstName);
     }
 
-    @PostMapping("/get-by-condition")
+
+    // getAll employee by last name (equals())
+    @GetMapping("/getAll-one-by-lastName/{lastName}")
+    public Employee getSingleEmployeeByLastName(@PathVariable String lastName) {
+        return employeeQueryService.getSingleEmployeeByLastName(lastName);
+    }
+
+
+    @GetMapping("/salary-greater-than/{salary}")
+    public List<Employee> getEmployeeBySalaryGreaterThan(@PathVariable int salary) {
+        return employeeQueryService.getEmployeeBySalaryGreaterThan(salary);
+    }
+
+
+    @PostMapping("/getAll-by-condition")
     public List<Employee> getEmployeeByCondition(@RequestBody Employee employee) {
         return employeeQueryService.getEmployeeByCondition(employee);
     }

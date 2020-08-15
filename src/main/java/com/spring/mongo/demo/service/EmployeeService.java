@@ -7,23 +7,20 @@ import com.spring.mongo.demo.model.Employee;
 
 public interface EmployeeService {
 	
-	List<Employee> get();
+	List<Employee> getAll();
+
+	List<Employee> getEmployeeByFirstName(String firstName);
+
+	Employee getOneEmployeeByFirstName(String firstName);
+
+	List<Employee> getEmployeeByFirstNameLike(String firstName);
+
+	Employee getEmployeeById(int empId);
 	
-	Employee getEmployeeByName(Employee employee);
-	
-	Employee getEmployee(Employee employee);
-	
-	Employee getEmployeeBylName(Employee employee);
-	
-	Employee getEmployeeByFirstName(Employee employee);
-	
-	List<Employee> getEmployeeByFrName(Employee employee);
-	
-	List<Employee> getEmployeeByWhereSalary(Employee employee);
+	Employee getEmployeeByLastName(String lastName);
+
+	List<Employee> getEmployeeBySalaryGreaterThan(int salary);
 	
 	List<Employee> getEmployeeByCondition(Employee employee);
-	
-	
-	
-	
+
 }
