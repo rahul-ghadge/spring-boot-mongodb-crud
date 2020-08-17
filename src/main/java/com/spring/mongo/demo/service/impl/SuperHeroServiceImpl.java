@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SuperHeroServiceImpl  implements SuperHeroService {
@@ -22,8 +21,7 @@ public class SuperHeroServiceImpl  implements SuperHeroService {
 
     @Override
     public SuperHero findById(String id) {
-        return repository.findById(id)
-                .orElse(new SuperHero());
+        return repository.findById(id).orElse(new SuperHero());
     }
 
     @Override
@@ -38,8 +36,6 @@ public class SuperHeroServiceImpl  implements SuperHeroService {
 
     @Override
     public void delete(String id) {
-        Optional<SuperHero> superHeroOptional = repository.findById(id);
-        if (superHeroOptional.isPresent())
-            repository.delete(superHeroOptional.get());
+       repository.findById(id).ifPresent(superHero -> repository.delete(superHero));
     }
 }

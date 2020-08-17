@@ -18,7 +18,7 @@ public class SuperHeroController {
 
     @GetMapping
     public ResponseEntity<List<?>> findAll() {
-        List<SuperHero> list = (List<SuperHero>) superHeroService.findAll();
+        List<?> list = superHeroService.findAll();
         return ResponseEntity.ok().body(list);
     }
 

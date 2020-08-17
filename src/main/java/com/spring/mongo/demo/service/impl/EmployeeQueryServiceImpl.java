@@ -76,7 +76,7 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 	@Override
 	public List<Employee> getEmployeeByCondition(Employee employee) {
 		List<Employee> list = employeeQueryDao.getAll();
-		List<Employee> matchingEmps = new ArrayList<>();
+		List<Employee> employees = new ArrayList<>();
 
 		if (null != employee && (null != employee.getFirstName() || employee.getEmpId() > 0
 				|| null != employee.getLastName() || employee.getSalary() > 0)) {
@@ -90,7 +90,7 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 							&& emp.getFirstName().equalsIgnoreCase(employee.getFirstName())
 							&& emp.getLastName().equalsIgnoreCase(employee.getLastName())
 							&& emp.getSalary() == employee.getSalary()) {
-						matchingEmps.add(emp);
+						employees.add(emp);
 
 						break;
 					} else {
@@ -98,14 +98,14 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 					}
 				}
 				if (employee.getEmpId() == emp.getEmpId()) {
-					matchingEmps.add(emp);
+					employees.add(emp);
 					continue;
 				}
 
 				// First name
 				if (null != employee.getFirstName()) {
 					if (emp.getFirstName().toLowerCase().contains(employee.getFirstName().toLowerCase())) {
-						matchingEmps.add(emp);
+						employees.add(emp);
 						// Go back to first statement (nothing but for loop)
 						continue;
 					}
@@ -114,24 +114,24 @@ public class EmployeeQueryServiceImpl implements EmployeeQueryService {
 				// Last name
 				if (null != employee.getLastName()) {
 					if (emp.getLastName().equalsIgnoreCase(employee.getLastName()))
-						matchingEmps.add(emp);
+						employees.add(emp);
 					// Go back to first statement (nothing but for loop)
 					continue;
 				}
 				// salary
 				if (employee.getSalary() == emp.getSalary()) {
-					matchingEmps.add(emp);
+					employees.add(emp);
 				}
 				// ---------------------------------------------------------
 			}
 			// returning the list
-			return matchingEmps;
+			return employees;
 		}
 		// if below statements return false only then below list is returning
 		// if (null != employee &&
 		// (null != employee.getFirstName() || employee.getEmpId() > 0
 		// || null != employee.getLastName() || employee.getSalary() > 0))
-		return matchingEmps;
+		return employees;
 	}
 
 }
