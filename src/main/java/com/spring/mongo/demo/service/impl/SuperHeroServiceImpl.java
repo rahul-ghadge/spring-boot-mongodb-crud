@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SuperHeroServiceImpl  implements SuperHeroService {
+public class SuperHeroServiceImpl implements SuperHeroService {
 
     @Autowired
     private SuperHeroRepository repository;

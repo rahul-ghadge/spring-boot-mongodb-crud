@@ -42,7 +42,7 @@ public class EmployeeQueryController {
 
 
     // getAll employee by last name (equals())
-    @GetMapping("/getAll-one-by-lastName/{lastName}")
+    @GetMapping("/one-by-lastName/{lastName}")
     public Employee getSingleEmployeeByLastName(@PathVariable String lastName) {
         return employeeQueryService.getSingleEmployeeByLastName(lastName);
     }
@@ -54,7 +54,7 @@ public class EmployeeQueryController {
     }
 
 
-    @PostMapping("/getAll-by-condition")
+    @PostMapping("/get-by-condition")
     public List<Employee> getEmployeeByCondition(@RequestBody Employee employee) {
         return employeeQueryService.getEmployeeByCondition(employee);
     }

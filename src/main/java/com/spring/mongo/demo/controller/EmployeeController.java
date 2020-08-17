@@ -48,7 +48,7 @@ public class EmployeeController {
 		return employeeService.getEmployeeByFirstNameLike(firstName);
 	}
 
-	@GetMapping("/get-one-by-lastName/{lastName}")
+	@GetMapping("/one-by-lastName/{lastName}")
 	public Employee getEmployeeBylName(@PathVariable String lastName) {
 		return employeeService.getEmployeeByLastName(lastName);
 	}

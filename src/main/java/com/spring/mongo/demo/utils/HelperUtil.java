@@ -20,7 +20,7 @@ public class HelperUtil {
 		            Employee.builder().empId(3).firstName("Sunny").lastName("Deol").salary(5000.0f).build(),
 		            Employee.builder().empId(4).firstName("Salman").lastName("Khan").salary(6000.0f).build(),
 		            Employee.builder().empId(5).firstName("Aamir").lastName("Khan").salary(7000.0f).build(),
-		            Employee.builder().empId(6).firstName("Sharukh").lastName("Khan").salary(8000.0f).build(),
+		            Employee.builder().empId(6).firstName("Shahrukh").lastName("Khan").salary(8000.0f).build(),
 		            Employee.builder().empId(7).firstName("Ranbir").lastName("Kapoor").salary(9000.0f).build(),
 		            Employee.builder().empId(8).firstName("Ranveer").lastName("Singh").salary(10000.0f).build(),
 		            Employee.builder().empId(9).firstName("Akshay").lastName("Kumar").salary(11000.0f).build(),
