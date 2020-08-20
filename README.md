@@ -62,9 +62,9 @@ Or
    
    
 2. #### Properties file
-    Reading Mongo DB related properties from **application.application** file and configuring Mongo connection factory for mongoDB.  
+    Reading Mongo DB related properties from **application.properties** file and configuring Mongo connection factory for mongoDB.  
 
-    **src/main/resources/application.yml**
+    **src/main/resources/application.properties**
      ```
     spring.data.mongodb.host=localhost
     spring.data.mongodb.port=27017
