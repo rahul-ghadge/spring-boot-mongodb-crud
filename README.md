@@ -1,4 +1,4 @@
-# spring-boot-mongodb
+# spring-boot-mongodb-crud
 
 This project explains CRUD (**C**reate, **R**ead, **U**pdate, **D**elete) operations using MongoTemplate and MongoRepository using spring boot and mongo DB.
 In this app we are using Spring Data JPA for built-in methods to do CRUD operations and Mongo queries using MongoTemplate.     
